@@ -1,0 +1,31 @@
+describe("WikiParser", function() {
+
+
+  it('assigns constructor argument to the documentText', function() {
+    var wikiParser = new WikiParser('blah blah blah');
+
+    expect(wikiParser.documentText).toBe('blah blah blah');
+  });
+
+  it('returns one image when there is one match', function() {
+
+  });
+  
+  //Articles
+  it ("should translate the wiki-like link markups to html anchors", function() {
+    var wikiParser = new WikiParser('[Article|id|optional alternative headline]');
+    
+    expect(wikiParser.link()).toBe('<a href="index.php?id=<id from the command>"><headline, possibly alternative headline></a>');
+  });
+
+
+  //Images
+  it ("should translate the wiki-like image markups to html images", function() {
+    var wikiParser = new WikiParser('[Image|name|caption]');
+    
+    expect(wikiParser.image()).toBe('<img src="im.php?imname=<name>" alt="<caption>" /> Caption: <caption>');
+  });
+});
+
+
+
