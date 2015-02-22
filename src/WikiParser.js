@@ -15,6 +15,13 @@ WikiParser.prototype.toHtml = function() {
   return res;
 };
 
+// {
+//   '[Article|1|article]': '<a href="index.php?id=1">Ruby the new PHP?, article</a>',
+//   '[Article|3]': '',
+//   '[Article|2|This one]': '<a href="index.php?id=2">Boring article, This one</a>',
+//   '[Image|guitar.jpg|a guitar]': '<img src="im.php?imname=guitar.jpg" alt="a guitar" /> Caption: a guitar'
+// };
+
 WikiParser.prototype.replacements = function() {
   var res = {};
 

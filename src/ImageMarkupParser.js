@@ -2,21 +2,6 @@ var ImageMarkupParser = function (imageMarkupText){
   this.imageMarkupText = imageMarkupText;
 };
 
-ImageMarkupParser.prototype.imageMarkup = function() {
-  var match = this.imageMarkupText.match(/\[(.+?)\]/);
-
-  if (match) {
-    var imageMarkupComponents = match[1].split('|');
-    var name = imageMarkupComponents[1];
-    var caption = imageMarkupComponents[2];
-
-    return {
-      name: name,
-      caption: caption
-    }
-  };
-};
-
 ImageMarkupParser.prototype.recognisedImages = function() {
   return [ "guitar.jpg", "gavin/'s new car.jpg", "coffee.jpg" ];
 };
