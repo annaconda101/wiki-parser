@@ -29,3 +29,71 @@ describe("WikiParser", function() {
 
 
 
+
+    describe('articleMarkups', function() {
+      it('should extract all article markups', function() {
+        var wikiParser = new WikiParser(markup);
+
+        expect(wikiParser.articleMarkups()).toEqual([
+          { id: '1', optionalHeadline: 'article' },
+          { id: '3', optionalHeadline: null },
+          { id: '2', optionalHeadline: 'This one'}
+        ]);
+      });
+    });
+
+    describe('articleAnchors', function() {
+      it('should translate all articleMarkups', function() {
+        var wikiParser = new WikiParser(markup);
+
+        expect(wikiParser.articleAnchors()).toEqual([
+          '<a href="index.php?id=1">Ruby the new PHP?, article</a>',
+          '<a href="index.php?id=2">Boring article, This one</a>'
+        ])
+      });
+    });
+
+    xit('translates markup to html', function() {
+
+    });
+
+
+
+
+    WikiParser.prototype.imageMarkups = function() {
+ var imageMarkupTexts = this.imageMarkupTexts();
+  var ret = [];
+
+  for(var i = 0; i < imageMarkupTexts.length; i++) {
+    var imageMarkupText = imageMarkupTexts[i];
+    var imageMarkupParser = new ImageMarkupParser(imageMarkupText);
+    var imageMarkup = imageMarkupParser.imageMarkup();
+
+    ret.push(imageMarkup); 
+  }
+  return ret;
+};
+
+WikiParser.prototype.imageAnchors = function() {
+  var imageMarkups = this.imageMarkups();
+  var recognisedImages = this.recognisedImages();
+
+  var ret = [];
+
+  for (var i = 0; i < imageMarkups.length; i++) {
+    var imageMarkup = imageMarkups[i];
+    var name = imageMarkup.name;
+    var caption = imageMarkup.caption;
+
+    var htmlAnchor = 
+      '<img src="im.php?imname=' + name + '" alt="' + caption + '"' + ' /> Caption: ' + caption;
+
+    ret.push(htmlAnchor);    
+  }
+
+  return ret;
+};
+
+
+
+
