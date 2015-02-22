@@ -11,6 +11,9 @@ describe("WikiParser", function() {
     expect(wikiParser.markup).toBe('blah blah blah');
   });
 
+
+
+
   describe('articles', function() {
     describe('recognisedArticles', function() {
       it("should return { '1': 'Ruby the new PHP?', 2: 'Boring article' };", function() {
@@ -54,10 +57,49 @@ describe("WikiParser", function() {
     });
 
     xit('translates markup to html', function() {
-      
+
     });
   });
-});
+
+
+//Images
+
+  describe('images', function() {
+    //step 1: recognisedArticles
+    describe('recognisedImages', function() {
+      it('should return [ "guitar.jpg", "gavin\'s new car.jpg", "coffee.jpg" ];' , function() {
+        var wikiParser = new WikiParser('');
+
+        expect(wikiParser.recognisedImages()).toEqual([ "guitar.jpg", "gavin/'s new car.jpg", "coffee.jpg" ]);
+      });
+    });
+
+    //step 2: imageMarkupTexts
+    describe('imageMarkupTexts', function() {
+      it ('should extract all image mark up texts', function() {
+        var wikiParser = new WikiParser(markup);
+
+        expect(wikiParser.imageMarkupTexts()).toEqual([
+          '[Image|guitar.jpg|a guitar]'
+        ]);
+      });
+    });
+
+    //step 3:
+    // describe('imageMarkup', function(){
+      // it ('should extract all image markups', function(){
+        // var wikiParser = new WikiParser(markup);
+
+        // expect(wikiParser.imageMarkup()).toEqual([
+          // [];
+        // ]);  
+      // });
+    // }); 
+
+  
+  });//images closing tag- do not delete
+});//wikiparser closing tag- to not delete
+
 
 
 

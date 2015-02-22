@@ -2,6 +2,8 @@ var WikiParser = function (markup) {
 	this.markup = markup;
 };
 
+
+//Articles
 WikiParser.prototype.recognisedArticles = function() {
 	return { '1': 'Ruby the new PHP?', '2': 'Boring article' };
 };
@@ -54,3 +56,15 @@ WikiParser.prototype.articleMarkups = function() {
 
   return ret;
 };
+
+
+//Images
+
+WikiParser.prototype.recognisedImages = function() {
+  return [ "guitar.jpg", "gavin/'s new car.jpg", "coffee.jpg" ];
+};
+
+WikiParser.prototype.imageMarkupTexts = function () {
+  return this.markup.match (/\[Image\|.+?\]/g);
+};
+
