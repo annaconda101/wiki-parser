@@ -20,25 +20,41 @@ describe("WikiParser", function() {
       });
     });
 
-    describe('articleMarkups', function() {
-      it('should extract all article markups', function() {
+    describe('articleMarkupTexts', function() {
+      it('should extract all article markup texts', function() {
         var wikiParser = new WikiParser(markup);
 
-        expect(wikiParser.articleMarkups()).toEqual([
+        expect(wikiParser.articleMarkupTexts()).toEqual([
           '[Article|1|article]', '[Article|3]', '[Article|2|This one]'
         ]);
       });
     });
 
+    describe('articleMarkups', function() {
+      it('should extract all article markups', function() {
+        var wikiParser = new WikiParser(markup);
+
+        expect(wikiParser.articleMarkups()).toEqual([
+          { id: '1', optionalHeadline: 'article' },
+          { id: '3', optionalHeadline: null },
+          { id: '2', optionalHeadline: 'This one'}
+        ]);
+      });
+    });
+
     describe('articleAnchors', function() {
-      xit('should translate all articleMarkups', function() {
+      it('should translate all articleMarkups', function() {
         var wikiParser = new WikiParser(markup);
 
         expect(wikiParser.articleAnchors()).toEqual([
-          '<a href="index.php?id=1">Ruby the new PHP?, article></a>',
-          '<a href="index.php?id=2">Boring article></a>'
+          '<a href="index.php?id=1">Ruby the new PHP?, article</a>',
+          '<a href="index.php?id=2">Boring article, This one</a>'
         ])
       });
+    });
+
+    xit('translates markup to html', function() {
+      
     });
   });
 });

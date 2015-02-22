@@ -1,29 +1,37 @@
 describe('ArticleMarkupParser', function() {
-  it('assigns constructor argument to articleMarkup property', function() {
-    var articleMarkupParser = new ArticleMarkupParser('blah blah blah');
+  describe('articleMarkupText', function() {
+	it('should equal the argument passed to the constructor', function() {
+	  var articleMarkupParser = new ArticleMarkupParser('blah blah blah');
 
-    expect(articleMarkupParser.articleMarkup).toBe('blah blah blah');
+	  expect(articleMarkupParser.articleMarkupText).toBe('blah blah blah');
+	});
   });
 
-  describe('id', function() {
-  	it('should extract value of id from articleMarkup', function() {
-  		var articleMarkupParser = new ArticleMarkupParser('[Article|2|This one]');
+  describe('articleMarkup', function() {
+	describe('id', function() {
+	  it('should extract the value', function() {
+	    var articleMarkupParser = new ArticleMarkupParser('[Article|2|This one]');
 
-  		expect(articleMarkupParser.id).toEqual('2');
-  	});
-  });
+	  	expect(articleMarkupParser.articleMarkup().id).toEqual('2');
+	  });
+	});
 
-  describe('optionalHeadline', function() {
-  	it('should extract value of optionalHeadline from articleMarkup', function() {
-  		var articleMarkupParser = new ArticleMarkupParser('[Article|2|This one]');
+	describe('optionalHeadline', function() {
+	  describe('when the articleMarkupText contains 3 elements separated by pipe characters', function() {
+	    it('should extract the last element', function() {
+	  	  var articleMarkupParser = new ArticleMarkupParser('[Article|2|This one]');
 
-  		expect(articleMarkupParser.optionalHeadline).toEqual('This one');
-  	});
+	  	  expect(articleMarkupParser.articleMarkup().optionalHeadline).toEqual('This one');
+	    });
+	  });
 
-  	it('should be null when missing value from articleMarkup', function() {
-  		var articleMarkupParser = new ArticleMarkupParser('[Article|3]');
+	  describe('when the articleMarkupText contains 2 elements separated by pipe characters', function() {
+	    it('should extract no value when missing value', function() {
+	  	  var articleMarkupParser = new ArticleMarkupParser('[Article|3]');
 
-  		expect(articleMarkupParser.optionalHeadline).toBeNull();
-  	});
+	  	  expect(articleMarkupParser.articleMarkup().optionalHeadline).toBeNull();
+	    });
+	  });
+	});
   });
 });
